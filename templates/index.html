@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LPD-OCR</title>
+    <link href="./styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
+  </head>
+
+  <style>
+    @font-face {
+      font-family: "LP";
+      src: url("../RegistrationPlateUk-P4vB.ttf");
+    }
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #feb404;
+      border-radius: 4px;
+    }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0a1d23;
+      /* background: radial-gradient(ellipse at center, #0a1d23, #0c222a); */
+      /* background-image: url("https://cdn.discordapp.com/attachments/894801439992475768/1128791707555725412/bg-small.png"); */
+      background-size: cover;
+      background-position: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    .navbar {
+      width: 100vw;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      /* background-color: #080607; */
+      font-family: "LP", sans-serif;
+      font-size: large;
+      /* background-color: #2c2b28; */
+    }
+    h1 {
+      color: #feb404;
+      font-size: 1.8rem;
+    }
+    .footer-div {
+      text-align: center;
+      /* background: linear-gradient(to bottom, #000000, #0a1d23); */
+      padding: 0;
+      margin: 0;
+    }
+    .footer-hr {
+      border: none;
+      border-top: 1.5px solid #d8dbe2;
+      width: 100%;
+    }
+    .social-icons a {
+      color: #d8dbe2;
+      font-size: 24px;
+      margin: 10px 10px;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      color: #d12a29;
+    }
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #e6e1d6;
+    }
+    .main-title {
+      color: #e6e1d6;
+    }
+
+    .upload {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    /* .upload-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 4px dotted #d8dbe2;
+      box-sizing: border-box;
+      height: 100px;
+      width: 200px;
+      margin-bottom: 10px;
+    } */
+
+    .btn {
+      padding: 10px 20px;
+      width: 200px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 5px;
+      border: none;
+      background-color: #da3704;
+      color: #d8dbe2;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .btn:hover {
+      background-color: #b12d04;
+    }
+    table {
+      margin: 0 auto;
+      width: 70%;
+      font-family: "LP", sans-serif;
+      /* border: 4px solid #d8dbe2; */
+    }
+
+    table td {
+      text-align: center;
+    }
+
+    table th {
+      text-align: center;
+      padding: 5px;
+      /* background-color: #4caf50; */
+      color: #d8dbe2;
+      font-size: 1.7rem;
+    }
+
+    table img {
+      max-width: 100%;
+      max-height: 200px;
+      display: block;
+      margin: 0 auto;
+    }
+    .cropped-img {
+      max-width: 100%;
+      max-height: 60px;
+      display: block;
+      margin: 0 auto;
+    }
+    /* section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    } */
+    #main-screen {
+      background-color: #0a1d23;
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #lpd {
+      height: 100vh;
+    }
+    .scroll-down {
+      height: 50px;
+      width: 30px;
+      border: 2px solid #e6e1d6;
+      position: absolute;
+      left: calc(50% - 15px);
+      /* transform: translateX(-50%); */
+      bottom: 20px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    .scroll-down::before,
+    .scroll-down::after {
+      content: "";
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      border: 2px solid #e6e1d6;
+      height: 10px;
+      width: 10px;
+      transform: translate(-50%, -80%) rotate(45deg);
+      border-top: transparent;
+      border-left: transparent;
+      animation: scroll-down 1s ease-in-out infinite;
+    }
+    .scroll-down::after {
+      top: 30%;
+      animation-delay: 5s;
+    }
+    @keyframes scroll-down {
+      0% {
+        opacity: 0;
+      }
+      30% {
+        opacity: 1;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        top: 80%;
+      }
+    }
+    .fab.fa-github,
+    fab.fa-linkedin {
+      margin-bottom: 10px;
+    }
+    .form-control {
+      display: none;
+    }
+    label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 4px dotted #d8dbe2;
+      box-sizing: border-box;
+      height: 100px;
+      width: 200px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      color: #d8dbe2;
+    }
+    label:hover {
+      background-color: rgb(216, 219, 226, 0.2);
+    }
+    .upload-box i {
+      color: #d8dbe2;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+    .pfp {
+      margin-right: 10px;
+      border-radius: 200px;
+      background-color: #feb404;
+    }
+  </style>
+
+  <body>
+    <!-- <section id="main-screen">
+      <div class="wrapper">
+        <h1 class="main-title">
+          LICENSE PLATE DETECTION WITH OPTICAL CHARACTER RECOGNITION
+        </h1>
+        <a href="#lpd">
+          <div class="scroll-down"></div>
+        </a>
+      </div>
+    </section> -->
+    <section id="lpd">
+      <div class="wrapper">
+        <nav class="navbar">
+          <div>
+            <a>
+              <h1>
+                LICENSE PLATE DETECTION WITH OPTICAL CHARACTER RECOGNITION
+              </h1>
+            </a>
+          </div>
+        </nav>
+
+        <div class="upload">
+          <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+              <div class="upload-box">
+                <input
+                  type="file"
+                  id="file"
+                  class="form-control"
+                  name="image_name"
+                  required
+                />
+                <label for="file">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <span class="file-text">Choose File</span>
+                  <span class="file-name"></span>
+                </label>
+              </div>
+              <input
+                type="submit"
+                value="Upload"
+                class="btn btn-outline-secondary"
+              />
+            </div>
+          </form>
+        </div>
+
+        {% if upload %}
+        <div class="container">
+          <div>
+            <br />
+            <table>
+              <tr>
+                <th>Uploaded Image</th>
+                <th>Image with Bounding Box</th>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    class="left-img"
+                    src="./static/upload/{{ upload_image }}"
+                    alt=""
+                  />
+                </td>
+                <td>
+                  <img
+                    class="right-img"
+                    src="./static/predict/{{ upload_image }}"
+                    alt=""
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"><br /><br /></td>
+              </tr>
+              <tr>
+                <th>Cropped License Plate</th>
+                <th>OCR</th>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    class="cropped-img"
+                    src="./static/roi/{{ upload_image }}"
+                    alt=""
+                  />
+                </td>
+                <td>
+                  <h1>{{ text }}</h1>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        {% endif %}
+
+        <footer class="footer-div">
+          <hr class="footer-hr" />
+          <h2>
+            <img
+              src="https://cdn.discordapp.com/attachments/894801439992475768/1128785770963025972/footername.png"
+              class=""
+              width="250px"
+            />
+          </h2>
+          <div class="social-icons">
+            <a
+              href="https://www.linkedin.com/in/shiv-akash/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/Chu1503"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <!-- <a href="shivakash2003@gmail.com">
+                <i class="fas fa-envelope"></i>
+              </a> -->
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <script>
+      const fileInput = document.getElementById("file");
+      const fileText = document.querySelector(".file-text");
+      const fileName = document.querySelector(".file-name");
+
+      fileInput.addEventListener("change", (event) => {
+        const files = event.target.files;
+        if (files.length > 0) {
+          const fileNameText = files[0].name;
+          if (fileNameText.length > 10) {
+            const shortenedFileName =
+              fileNameText.substring(0, 5) +
+              "..." +
+              fileNameText.substring(fileNameText.length - 5);
+            fileName.textContent = shortenedFileName;
+          } else {
+            fileName.textContent = fileNameText;
+          }
+          fileText.style.display = "none";
+          fileName.style.display = "block";
+        } else {
+          fileText.style.display = "block";
+          fileName.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
